@@ -35,13 +35,12 @@ def updateChain(token, chainID):
     #jun yu currently working on it
     pass
 
-def queryChain():
-    chainID = input("please enter chainID:\n")
+def queryChain(chainID):
     chain_url_id = chain_url + "/"+chainID
 
     response = requests.get(chain_url_id, headers = headers)
 
-    print(response.text)
+    return response.text
 
 
 
