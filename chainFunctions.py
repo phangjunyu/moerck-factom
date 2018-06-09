@@ -9,6 +9,10 @@ headers = {
     "factom-provider-token": "D5Sf9ibJxKN4NSHRTpx3OTt5vwfpepIWnE5opJTGKVvBDiJ6"
 }
 
+
+def main():
+    print ("In Main")
+
 def createVoteChain(voting_station_id):
 
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
