@@ -1,3 +1,4 @@
+import registrationChainCreation as rcc
 class Vote:
     def __init__(self, choice, votingStation, token):
         self.choice = choice
@@ -19,6 +20,7 @@ class VoteManager:
 
 
 class Registration:
+
     def validateToken(token):
         tokenList = getTokenList()
         if token in tokenList:
@@ -33,4 +35,7 @@ class Registration:
 
     def getTokenList():
         #get the token list from the registration chain
-        return ['A', 'B', 'C']
+        valid  = rcc.queryChain('List of Valid Tokens')
+        used = rcc.queryChain('List of Used Tokens')
+        available = valid - used
+        return available

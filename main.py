@@ -1,4 +1,4 @@
-import chainFunctions as cf
+import cli
 
 menu ="""select your choice:
     0) Create a chain
@@ -8,21 +8,10 @@ menu ="""select your choice:
 
 choice = input(menu)
 
-def createVote():
-    voting_station_id = input("Please enter an ID for the voting station you want to create:\n")
-    cf.createVoteChain(voting_station_id)
-
-def update():
-    cf.updateChain(vote, external_ids)
-
-def query():
-    chainID = input("please enter chainID:\n")
-    cf.queryChain(chainID)
-
 options = {
-  '0': createVote(),
-  '1': update(),
-  '2': query()
+  '0': cli.createVote,
+  '1': cli.update,
+  '2': cli.query
 }
 
 options[choice]()
