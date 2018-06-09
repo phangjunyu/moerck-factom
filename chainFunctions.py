@@ -9,25 +9,30 @@ headers = {
     "factom-provider-token": "D5Sf9ibJxKN4NSHRTpx3OTt5vwfpepIWnE5opJTGKVvBDiJ6"
 }
 
-def createChain():
-    voting_station = input("Please enter an ID for the voting station you want to create:\n")
+def createVoteChain(voting_station_id):
 
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
     b_content = base64.b64encode(b"Contains vote counts for this voting station.").decode('UTF-8')
-    b_exid = base64.b64encode(voting_station.encode('ascii')).decode('UTF-8')
+    b_exid = base64.b64encode(voting_station_id.encode('ascii')).decode('UTF-8')
 
     payload = {"external_ids":[b_exid, b_unixtime],"content":b_content}
 
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
-    print(response.text)
+    print(json.dumps(response.json(), sort_keys=True, indent=4))
 
-def updateChain(vote, voting_station):
-    pass
+def updateChain(vote, external_ids):
+    b_exid = base64.b64encode(voting_station.encode('ascii')).decode('UTF-8')
+    b_vote = base64.b64encode(vote.encode('ascii').decode('UTF-8'))
 
-def queryChain():
-    chainID = input("please enter chainID:\n")
+    payload = {"external_ids":external_ids, "content": b_vote}
+    response = requests.request("POST", url, data=payload)
+
+    print(json.dumps(response.json(), sort_keys=True, indent=4))
+
+def queryChain(chainID):
+
     chain_url_id = chain_url + "/"+chainID
 
     response = requests.get(chain_url_id, headers = headers)
 
-    print(response.text)
+    print(json.dumps(response.json(), sort_keys=True, indent=4))
