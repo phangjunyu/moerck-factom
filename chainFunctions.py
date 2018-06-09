@@ -9,8 +9,6 @@ headers = {
     "factom-provider-token": "D5Sf9ibJxKN4NSHRTpx3OTt5vwfpepIWnE5opJTGKVvBDiJ6"
 }
 
-
-
 def createVoteChain(voting_station_id):
 
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
@@ -19,18 +17,18 @@ def createVoteChain(voting_station_id):
     payload = {"external_ids":[b_exid, b_unixtime],"content":b_content}
 
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
-    print(json.dumps(response.json(), sort_keys=True, indent=4))
+    return response.json()
 
-def updateChain(vote, chainID):
-    b_vote = base64.b64encode(vote.encode('ascii')).decode('UTF-8')
+def updateChain(content, chainID, contentType):
+    b_content = base64.b64encode(content.encode('ascii')).decode('UTF-8')
     external_ids = getChainExternalIDs(chainID)
     content = {
-        "vote": b_vote
+        contentType: b_content
     }
     payload = {"external_ids":external_ids, "content": content}
     response = requests.request("POST", chain_url, data=json.dumps(payload), headers = headers)
 
-    print(response.text)
+    return response.text
 
 #intermediate function for updateChain
 def getChainExternalIDs(chainID):
@@ -44,7 +42,7 @@ def getChainExternalIDs(chainID):
 def queryChain(chainID):
     chain_url_id = chain_url + "/"+chainID
     response = requests.get(chain_url_id, headers = headers)
-    print(json.dumps(response.json(), sort_keys=True, indent=4))
+    return response.json()
 
 def getEntries(chainID):
     chain_url_id = chain_url + "/" + chainID + "/entries"
@@ -52,8 +50,16 @@ def getEntries(chainID):
     response = requests.get(chain_url_id, headers = headers)
     response = response.json()
 
+    entries = []
+
+    #TODO: Remember to take out the first entry since it is the description
     for item in response['items']:
         entry_url = item['links']['entry']
         response_entry = requests.get(entry_url, headers = headers)
         content = base64.b64decode(response_entry.json()['content']).decode('UTF-8')
-        print(json.dumps(content, sort_keys=True, indent=4))
+        entries.append(content)
+
+    json_entries = {
+        "content": entries
+    }
+    return json_entries
