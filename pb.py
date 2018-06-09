@@ -35,7 +35,10 @@ class Registration:
 
     def getTokenList():
         #get the token list from the registration chain
-        valid  = rcc.queryChain('List of Valid Tokens')
-        used = rcc.queryChain('List of Used Tokens')
-        available = valid - used
-        return available
+        valid = set(rcc.queryChain('List of Valid Tokens'))
+        used = set(rcc.queryChain('List of Used Tokens'))
+        # Chek that there are no Tokens that have been used that were not valid
+        if not (used - valid)
+            print("You got Hacked!")
+            raise ValueError
+        return list(valid - used)
