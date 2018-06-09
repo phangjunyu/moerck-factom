@@ -10,9 +10,8 @@ def createVotingStation():
 
 def update():
     chainID = input("Please enter chainID:\n")
-    contentType = input("Please enter entryType:\n")
     entry = input("Please enter entry:\n")
-    status = cf.updateChain(entry, chainID, contentType)
+    status = cf.updateChain(entry, chainID)
     print(status)
 
 def query():
