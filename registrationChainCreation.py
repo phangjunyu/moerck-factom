@@ -32,6 +32,7 @@ def generateTokens(numberOfTokens, sizeOfToken = 32):
         tokenList.add(token)
     return list(tokenList)
 
+
 def populateValidChain(numberOfTokens, sizeOfToken = 32):
     tokenList = generateTokens(numberOfTokens, sizeOfToken)
     updateChain(tokenList, chainID = 'List of Valid Tokens')

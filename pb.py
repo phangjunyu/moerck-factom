@@ -31,14 +31,12 @@ class Registration:
 
     def updateRegistrationChain(token):
         #remove the token from the registration factom chain
-        raise NotImplemented
+        self.updateChain("List Of Used Tokens")
 
     def getTokenList():
         #get the token list from the registration chain
-        valid = set(rcc.queryChain('List of Valid Tokens'))
-        used = set(rcc.queryChain('List of Used Tokens'))
-        # Chek that there are no Tokens that have been used that were not valid
-        if not (used - valid)
-            print("You got Hacked!")
-            raise ValueError
-        return list(valid - used)
+        valid  = rcc.queryChain('List of Valid Tokens')
+        used = rcc.queryChain('List of Used Tokens')
+
+        available = valid - used
+        return available
