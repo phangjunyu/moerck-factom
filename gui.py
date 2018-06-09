@@ -1,7 +1,11 @@
 from tkinter import *
+import registrationFunctions as rF
 
 def show_entry_fields():
    print("Name: %s\nUID: %s" % (e1.get(), e2.get()))
+
+def createVoter():
+    response = rF.createVoter(e1.get(),e2.get())
 
 master = Tk()
 Label(master, text="Name").grid(row=0)
