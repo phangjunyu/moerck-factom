@@ -1,11 +1,22 @@
 import tkinter as tk
-master = tk.Tk()
-whatever_you_do = "Whatever you do will be insignificant, but it is very important that you do it.\n(Mahatma Gandhi)"
-msg = tk.Message(master, text = whatever_you_do)
-msg.config(bg='white', font=('Arial', 24, 'bold'))
-msg.pack()
 
+root = tk.Tk()
+tk.Label(root,
+		 text="Red Text in Times Font",
+		 fg = "red",
+		 font = "Times").pack()
+tk.Label(root,
+		 text="Green Text in Helvetica Font",
+		 fg = "light green",
+		 bg = "dark green",
+		 font = "Helvetica 16 bold italic").pack()
+tk.Label(root,
+		 text="Blue Text in Verdana bold",
+		 fg = "blue",
+		 bg = "yellow",
+		 font = "Verdana 10 bold").pack()
 
+root.mainloop()
 def write_slogan():
     print("Tkinter is easy to use!")
 

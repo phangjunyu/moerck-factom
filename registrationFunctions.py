@@ -2,6 +2,7 @@ import chainFunctions as cf
 import base64
 import json
 import requests
+from glossary import VA, RA
 
 chain_url = "https://apiplus-api-sandbox-testnet.factom.com/v1/chains"
 headers = {
@@ -19,17 +20,17 @@ def createVoter(name, uid):
     return response.json()
 
 def putToken(type, chainID):
-    ra_ = checkTokens("RA", chainID)
-    va_ = checkTokens("VA", chainID)
-    if type == "RA" and not ra_ and not va_:
+    ra_ = checkTokens(RA, chainID)
+    va_ = checkTokens(VA, chainID)
+    if type == RA and not ra_ and not va_:
         content = {
-            "RA": True,
-            "VA": va_
+            RA: True,
+            VA: va_
         }
     elif type == "VA" and not va_ and ra_:
         content = {
-            "RA": ra_,
-            "VA": True
+            RA: ra_,
+            VA: True
         }
     else:
         return "Error, you are not allowed to submit a vote."
