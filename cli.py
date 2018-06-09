@@ -6,12 +6,8 @@ def createVote():
     cf.createVoteChain(voting_station_id)
 
 def update():
-    answer = input("Please enter external ids. Enter a space to end input loop.\n")
-    external_ids = []
-    while(answer != " "):
-        external_ids.append(answer)
-        answer = input("Please enter external ids. Enter a space to end input loop.\n")
-
+    chainID = input("Please enter chainID:\n")
+    external_ids = cf.getChainExternalIDs(chainID)
     vote = input("Please enter vote:\n")
     cf.updateChain(vote, external_ids)
 

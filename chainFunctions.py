@@ -19,18 +19,27 @@ def createVoteChain(voting_station_id):
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
     print(json.dumps(response.json(), sort_keys=True, indent=4))
 
-def updateChain(vote, external_ids):
+def updateChain(vote, chainID):
     b_vote = base64.b64encode(vote.encode('ascii')).decode('UTF-8')
-
-    payload = {"external_ids":external_ids, "content": b_vote}
+    external_ids = getChainExternalIDs(chainID)
+    content = {
+        "vote": b_vote
+    }
+    payload = {"external_ids":external_ids, "content": content}
     response = requests.request("POST", chain_url, data=json.dumps(payload), headers = headers)
 
     print(response.text)
 
-def queryChain(chainID):
-
+#intermediate function for updateChain
+def getChainExternalIDs(chainID):
     chain_url_id = chain_url + "/"+chainID
 
     response = requests.get(chain_url_id, headers = headers)
+    external_ids = response.json()["external_ids"]
+    return external_ids
 
+#returns meta data of chain for reference purposes
+def queryChain(chainID):
+    chain_url_id = chain_url + "/"+chainID
+    response = requests.get(chain_url_id, headers = headers)
     print(json.dumps(response.json(), sort_keys=True, indent=4))
