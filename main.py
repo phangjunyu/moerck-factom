@@ -7,9 +7,9 @@ menu ="""select your choice:
 
 choice = input(menu)
 
-if choice == '0':
+if choice == '1':
     menu ="""select your choice:
-        0) Create a chain
+        0) Create a Voting Station
         1) Update a chain
         2) Query a chain
         3) Get all entries of a chain
@@ -34,7 +34,7 @@ else:
     choice = input(menu)
 
     options = {
-      '0': cli.createVoter
+      '0': cli.createVoter,
       '1': cli.checkTokens,
       # '1': cli.putRA,
       # '2': cli.putVA,
