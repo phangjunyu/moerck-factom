@@ -10,8 +10,6 @@ headers = {
 }
 
 
-def main():
-    print ("In Main")
 
 def createVoteChain(voting_station_id):
 
@@ -38,3 +36,15 @@ def queryChain(chainID):
     response = requests.get(chain_url_id, headers = headers)
 
     print(json.dumps(response.json(), sort_keys=True, indent=4))
+
+def getEntries(chainID):
+    chain_url_id = chain_url + "/" + chainID + "/entries"
+
+    response = requests.get(chain_url_id, headers = headers)
+    response = response.json()
+
+    for item in response['items']:
+        entry_url = item['links']['entry']
+        response_entry = requests.get(entry_url, headers = headers)
+        content = base64.b64decode(response_entry.json()['content']).decode('UTF-8')
+        print(json.dumps(content, sort_keys=True, indent=4))
