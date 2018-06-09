@@ -3,6 +3,7 @@ import chainFunctions as cf
 import time, secrets
 from glossary import VA, RA
 import FinalCount
+
 class Vote:
     def __init__(self, choice):
         self.choice = choice
@@ -25,9 +26,10 @@ class PollingBooth:
     def submitVote(self, vote, userID):
         zzTime = secrets.randbelow(10)
         #time.sleep(zzTime)
-        cf.updateChain({'vote' : vote.choice} , self.votingStationID)
+        res = cf.updateChain({'vote' : vote.choice} , self.votingStationID)
         rf.putToken(VA, userID)
         print('voted for', vote.choice)
+
 
 def checkVoter(name, uid):
     status = rf.checkVoter(name, uid)
@@ -43,15 +45,15 @@ if __name__ == '__main__':
 
     votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
     pollingbooth = PollingBooth(votingStationID)
-    voterName = 'JY'
-    voterID = 'jcknwjkdn'
+    voterName = 'att'
+    voterID = 'a'
 
     #check if user already exist in the voter chain
     voterChainID = checkVoter(voterName, voterID)
     if not voterChainID:
         status = rf.createVoter(voterName, voterID)
         voterChainID = status['chain_id']
-
+    print (voterChainID)
     #put the RA token of the voter
     rf.putToken(RA, voterChainID)
     #once the RA token of the voter has been set, the voter is ready to vote
@@ -64,4 +66,4 @@ if __name__ == '__main__':
 
     fn = FinalCount.FinalCount()
     results = fn.countFinalTally()
-    print (results)
+    print ('hi',results)

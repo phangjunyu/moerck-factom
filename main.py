@@ -7,7 +7,7 @@ menu ="""select your choice:
 
 choice = input(menu)
 
-if choice == '1':
+if str(choice) == '1':
     menu ="""select your choice:
         0) Create a Voting Station
         1) Update a chain
@@ -15,7 +15,7 @@ if choice == '1':
         3) Get all entries of a chain
         """
 
-    choice = input(menu)
+    choice = str(input(menu))
 
     options = {
       '0': cli.createVotingStation,
@@ -33,7 +33,7 @@ else:
         3) Check Voter status
         """
 
-    choice = input(menu)
+    choice = str(input(menu))
 
     options = {
       '0': cli.createVoterChain,
