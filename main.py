@@ -8,10 +8,21 @@ menu ="""select your choice:
 
 choice = input(menu)
 
+def createVote():
+    voting_station_id = input("Please enter an ID for the voting station you want to create:\n")
+    cf.createVoteChain(voting_station_id)
+
+def update():
+    cf.updateChain(vote, external_ids)
+
+def query():
+    chainID = input("please enter chainID:\n")
+    cf.queryChain(chainID)
+
 options = {
-  '0': cf.createChain,
-  '1': cf.updateChain,
-  '2': cf.queryChain
+  '0': createVote(),
+  '1': update(),
+  '2': query()
 }
 
 options[choice]()
