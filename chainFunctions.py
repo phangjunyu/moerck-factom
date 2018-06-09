@@ -14,7 +14,6 @@ def createVoteChain(voting_station_id):
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
     b_content = base64.b64encode(b"Contains vote counts for this voting station.").decode('UTF-8')
     b_exid = base64.b64encode(voting_station_id.encode('ascii')).decode('UTF-8')
-
     payload = {"external_ids":[b_exid, b_unixtime],"content":b_content}
 
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
