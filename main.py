@@ -34,8 +34,8 @@ else:
     choice = input(menu)
 
     options = {
-      '0': cli.createVoter
-      '1': cli.checkTokens,
+      '0': cli.createVoterChain,
+      '1': cli.checkToken,
       # '1': cli.putRA,
       # '2': cli.putVA,
     }
