@@ -2,6 +2,7 @@ import registrationFunctions as rf
 import chainFunctions as cf
 import time, secrets
 from glossary import VA, RA
+import FinalCount
 class Vote:
     def __init__(self, choice):
         self.choice = choice
@@ -60,3 +61,7 @@ if __name__ == '__main__':
         raise ValueError
     else:
         pollingbooth.submitVote(vote, voterChainID)
+
+    fn = FinalCount.FinalCount()
+    results = fn.countFinalTally()
+    print (results)
