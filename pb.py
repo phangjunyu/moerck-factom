@@ -1,44 +1,24 @@
-import registrationChainCreation as rcc
+import chainFunctions as cf
+import time, secrets
 class Vote:
-    def __init__(self, choice, votingStation, token):
+    def __init__(self, choice, votingStationID, token):
         self.choice = choice
-        self.votingstation = votingstation
-        self.token = token
+        self.votingstationID = votingstationID
 
 class VoteManager:
 
-    def receiveVote(choice, votingStation, token):
-
-        #check if token is valid
-        isValid = Registration.validateToken(token)
-        if isValid:
-            vote = Vote(choice, votingStation, token)
+    def receiveVote(choice, votingStationID, user):
+        if validate(user):
+            vote = Vote(choice, votingStationID)
             return vote
         else:
-            print('Voter has already voted')
+            print('Voter has already voted or has not been registered')
             return False
 
+    def validate(user):
+        return checkRA(user) and checkVA(user)
 
-class Registration:
-
-    def validateToken(token):
-        tokenList = getTokenList()
-        if token in tokenList:
-            self.updateRegistrationChain(token)
-            return True
-        else:
-            return False
-
-    def updateRegistrationChain(token):
-        #remove the token from the registration factom chain
-        self.updateChain("List Of Used Tokens")
-
-    def getTokenList():
-        #get the token list from the registration chain
-        valid = set(rcc.queryChain('List of Valid Tokens'))
-        used = set(rcc.queryChain('List of Used Tokens'))
-        # Chek that there are no Tokens that have been used that were not valid
-        if not (used - valid)
-            print("You got Hacked!")
-            raise ValueError
-        return list(valid - used)
+    def submitVote(vote):
+        zzTime = secrets.randbelow(10)
+        time.sleep(zzTime)
+        cf.updateChain(vote.choice ,vote.votingStationID, 'vote')
