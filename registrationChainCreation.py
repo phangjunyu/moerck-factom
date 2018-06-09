@@ -8,7 +8,7 @@ headers = {
     "Content-Type": "application/json",
     "factom-provider-token": "D5Sf9ibJxKN4NSHRTpx3OTt5vwfpepIWnE5opJTGKVvBDiJ6"
 }
- 
+
 def createChain(chainID, description):
 
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
@@ -20,15 +20,21 @@ def createChain(chainID, description):
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
     print(response.text)
 
-def generateTokens(sizeOfToken, numberOfTokens):
-    tokenList = []
-    for i in range(numberOfTokens):
+import secrets
 
-    return tokenList
+def generateTokens(numberOfTokens, sizeOfToken = 32):
+    if 16 ** sizeOfToken < numberOfTokens:
+        print ('not possible to generate enough tokens with the given size of token')
+        raise ValueError
+    tokenList = set()
+    while numberOfTokens > len(tokenList):
+        token = secrets.token_hex(sizeOfToken)
+        tokenList.add(token)
+    return list(tokenList)
 
-def populateValidChain(tokenList):
-    for token in tokenList:
-        updateChain(token, 'List of Valid Tokens')
+def populateValidChain(numberOfTokens, sizeOfToken = 32):
+    tokenList = generateTokens(numberOfTokens, sizeOfToken)
+    updateChain(tokenList, chainID = 'List of Valid Tokens')
 
 
 def updateChain(token, chainID):
@@ -37,13 +43,9 @@ def updateChain(token, chainID):
 
 def queryChain(chainID):
     chain_url_id = chain_url + "/"+chainID
-
     response = requests.get(chain_url_id, headers = headers)
 
     return response.text
-
-
-
 
 
 
