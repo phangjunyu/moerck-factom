@@ -28,14 +28,16 @@ if choice == '0':
 else:
     menu ="""select your choice:
         0) Register
+        1) Check Tokens
         """
 
     choice = input(menu)
 
     options = {
       '0': cli.createVoter
-      '1': cli.putRA,
-      '2': cli.putVA,
+      '1': cli.checkTokens,
+      # '1': cli.putRA,
+      # '2': cli.putVA,
     }
 
     options[choice]()
