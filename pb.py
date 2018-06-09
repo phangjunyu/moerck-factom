@@ -6,8 +6,9 @@ class Vote:
         self.votingstationID = votingstationID
 
 class VoteManager:
-
-    def receiveVote(choice, votingStationID, user):
+    def __init__(self, votingStationID):
+        self.votingStationID = votingStationID
+    def receiveVote(choice, user):
         if validate(user):
             vote = Vote(choice, votingStationID)
             return vote
@@ -16,9 +17,10 @@ class VoteManager:
             return False
 
     def validate(user):
-        return checkRA(user) and checkVA(user)
+        return cf.checkRA(user) and cf.checkVA(user)
 
     def submitVote(vote):
         zzTime = secrets.randbelow(10)
         time.sleep(zzTime)
         cf.updateChain(vote.choice ,vote.votingStationID, 'vote')
+        cf.putVA(user)

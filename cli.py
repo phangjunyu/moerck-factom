@@ -27,7 +27,7 @@ def getEntries():
 def createVoterChain():
     name = input("Please enter your name:\n")
     uid = input("Please enter your uid:\n")
-    status = rf.createVoter(name, ssn)
+    status = rf.createVoter(name, uid)
     print(status)
 
 def putRA():
