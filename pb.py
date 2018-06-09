@@ -9,16 +9,16 @@ class PollingBooth:
     def __init__(self, votingStationID):
         self.votingStationID = votingStationID
 
-    def receiveVote(choice, user):
-        if validate(user):
-            vote = Vote(choice, votingStationID)
+    def receiveVote(choice, userID):
+        if validate(userID):
+            vote = Vote(choice)
             return vote
         else:
             print('Voter has already voted or has not been registered')
             return False
 
-    def validate(user):
-        return (not rf.checkTokens(VA, user)) and rf.checkTokens(RA, user)
+    def validate(userID):
+        return (not rf.checkTokens(VA, userID)) and rf.checkTokens(RA, userID)
 
     def submitVote(vote):
         zzTime = secrets.randbelow(10)
@@ -31,3 +31,19 @@ if __name__ = 'main':
     #when a user enters we first check
     votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
     pollingbooth = PollingBooth(votingStationID)
+    voterID = 'jcknwjkdn'
+
+    #check if user already exist in the voter chain
+    if checkUserExist(voterID):
+        voterChainID = rf.getChainID(voterEX_ID)
+    else:
+        voterChainID = rf.createVoter(voterEX_ID)
+    #put the RA token of the voter
+    rf.putToken(RA, voterChainID)
+    #once the RA token of the voter has been set, the voter is ready to vote
+    choice = input('vote')
+    vote = pollingbooth.receiveVote(choice, voterChainID)
+    if vote is False:
+        raise ValueError
+    else:
+        pollingbooth.submitVote(vote)
