@@ -30,6 +30,7 @@ else:
         0) Register
         1) Check Tokens
         2) Put a Token
+        3) Check Voter status
         """
 
     choice = input(menu)
@@ -38,6 +39,7 @@ else:
       '0': cli.createVoterChain,
       '1': cli.checkToken,
       '2': cli.putToken,
+      '3': cli.checkVoter,
     }
 
     options[choice]()

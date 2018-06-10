@@ -19,7 +19,7 @@ def createVoteChain(voting_station_id):
     response = requests.post(chain_url, data=json.dumps(payload), headers = headers)
     return response.json()
 
-#entry should be a dictionary
+#entry should be a dictionary/JSON
 def updateChain(entry, chainID):
     external_ids = getChainExternalIDs(chainID)
     b_content = base64.b64encode(json.dumps(entry).encode('ascii')).decode('UTF-8')
