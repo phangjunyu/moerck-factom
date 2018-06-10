@@ -1,5 +1,6 @@
 #Creates an input interface for user to enter options through command line
 import chainFunctions as cf
+import registrationFunctions as rf
 
 def createVotingStation():
     voting_station_id = input("Please enter an ID for the voting station you want to create:\n")
@@ -22,3 +23,21 @@ def getEntries():
     chainID = input("please enter chainID:\n")
     entries = cf.getEntries(chainID)
     print(entries)
+
+def createVoterChain():
+    name = input("Please enter your name:\n")
+    uid = input("Please enter your uid:\n")
+    status = rf.createVoter(name, uid)
+    print(status)
+
+def putToken():
+    chainID = input("Please enter chainID:\n")
+    type = input("Please enter type (VA or RA):\n")
+    status = rf.putToken(type, chainID)
+    print(status)
+
+def checkToken():
+    chainID= input("Please enter chainID:\n")
+    type = input("Please enter type (VA or RA):\n")
+    status = rf.checkTokens(type, chainID)
+    print(status)

@@ -1,19 +1,43 @@
 import cli
 
 menu ="""select your choice:
-    0) Create a chain
-    1) Update a chain
-    2) Query a chain
-    3) Get all entries of a chain
+    0) Registration Booth
+    1) Voting Booth
     """
 
 choice = input(menu)
 
-options = {
-  '0': cli.createVotingStation,
-  '1': cli.update,
-  '2': cli.query,
-  '3': cli.getEntries
-}
+if choice == '1':
+    menu ="""select your choice:
+        0) Create a Voting Station
+        1) Update a chain
+        2) Query a chain
+        3) Get all entries of a chain
+        """
 
-options[choice]()
+    choice = input(menu)
+
+    options = {
+      '0': cli.createVotingStation,
+      '1': cli.update,
+      '2': cli.query,
+      '3': cli.getEntries
+    }
+
+    options[choice]()
+else:
+    menu ="""select your choice:
+        0) Register
+        1) Check Tokens
+        2) Put a Token
+        """
+
+    choice = input(menu)
+
+    options = {
+      '0': cli.createVoterChain,
+      '1': cli.checkToken,
+      '2': cli.putToken,
+    }
+
+    options[choice]()
