@@ -12,7 +12,6 @@ class Vote:
 class PollingBooth:
     def __init__(self, votingStationID):
         self.votingStationID = votingStationID
-
     def receiveVote(self, choice, userID):
         if self.validate(userID):
             vote = Vote(choice)
@@ -45,6 +44,7 @@ def checkVoter(name, uid):
     else:
         return voter_[0]['chain_id']
 
+votingStationID = '5b856957cd2630858fa466093c5f8afa24ed640c2c7fa82bc64338a9d1c00afa'
 
 votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
 def register_vote(voterName, voterID):
@@ -57,7 +57,10 @@ def register_vote(voterName, voterID):
         voterChainID = status['chain_id']
     # print (voterChainID)
     #put the RA token of the voter
+    rf.putToken(RA, voterChainID)
     return voterChainID
+
+def vote(voterChainID, choice):
 
 def vote(voterChainID, choice):
     pollingbooth = PollingBooth(votingStationID)

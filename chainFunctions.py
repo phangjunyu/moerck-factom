@@ -9,10 +9,14 @@ headers = {
     "factom-provider-token": "D5Sf9ibJxKN4NSHRTpx3OTt5vwfpepIWnE5opJTGKVvBDiJ6"
 }
 
-def createVoteChain(voting_station_id):
+def createVoteChain(voting_station_id, candidates):
 
     b_unixtime = base64.b64encode(str(time.time()).encode('ascii')).decode('UTF-8')
-    b_content = base64.b64encode(b"Contains vote counts for this voting station.").decode('UTF-8')
+    description = {
+    "desc" : "Contains vote counts for this voting station",
+    "candidates" : candidates
+    }
+    b_content = base64.b64encode(json.dumps(description).encode('ascii')).decode('UTF-8')
     b_exid = base64.b64encode(voting_station_id.encode('ascii')).decode('UTF-8')
     payload = {"external_ids":[b_exid, b_unixtime],"content":b_content}
 
@@ -40,6 +44,13 @@ def queryChain(chainID):
     chain_url_id = chain_url + "/"+chainID
     response = requests.get(chain_url_id, headers = headers)
     return response.json()
+
+def getEntry(chainID):
+    chain_url_id = chainID
+
+    response = requests.get(chain_url_id, headers = headers)
+    response = response.json()
+    return response
 
 def getEntries(chainID):
     chain_url_id = chain_url + "/" + chainID + "/entries"
