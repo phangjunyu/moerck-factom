@@ -29,6 +29,7 @@ else:
     menu ="""select your choice:
         0) Register
         1) Check Tokens
+        2) Put a Token
         """
 
     choice = input(menu)
@@ -36,8 +37,7 @@ else:
     options = {
       '0': cli.createVoterChain,
       '1': cli.checkToken,
-      # '1': cli.putRA,
-      # '2': cli.putVA,
+      '2': cli.putToken,
     }
 
     options[choice]()

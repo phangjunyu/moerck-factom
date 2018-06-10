@@ -30,12 +30,14 @@ def createVoterChain():
     status = rf.createVoter(name, uid)
     print(status)
 
-def putRA():
+def putToken():
     chainID = input("Please enter chainID:\n")
-    status = rf.putRA(chainID)
+    type = input("Please enter type (VA or RA):\n")
+    status = rf.putToken(type, chainID)
     print(status)
 
 def checkToken():
     chainID= input("Please enter chainID:\n")
-    type = input("Please enter type:\n")
-    rf.checkTokens(type, chainID)
+    type = input("Please enter type (VA or RA):\n")
+    status = rf.checkTokens(type, chainID)
+    print(status)
