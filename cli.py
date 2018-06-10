@@ -61,8 +61,8 @@ def getFinalCount():
     final_count = fc.FinalCount()
     print (final_count.countFinalTally())
 
-def getCandidates():
-    chainID = input("please enter chainID:\n")
+def getCandidates(chainID):
+    # chainID = input("please enter chainID:\n")
     first_entry = cf.queryChain(chainID)['links']['first']
     result = cf.getEntry(first_entry)
     content = base64.b64decode(result['content']).decode('UTF-8')
