@@ -45,10 +45,9 @@ def checkVoter(name, uid):
     else:
         return voter_[0]['chain_id']
 
+votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
 
-def register_vote(name, UID):
-    voterName = name
-    voterID = UID
+def register_vote(voterName, voterID):
 
     #check if user already exist in the voter chain
     voterChainID = checkVoter(voterName, voterID)
@@ -57,10 +56,10 @@ def register_vote(name, UID):
         voterChainID = status['chain_id']
     # print (voterChainID)
     #put the RA token of the voter
-    return rf.putToken(RA, voterChainID)
+    rf.putToken(RA, voterChainID)
 
 def vote(name, UID, choice):
-    votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
+
     pollingbooth = PollingBooth(votingStationID)
     #once the RA token of the voter has been set, the voter is ready to vote
     # choice = input('vote')
@@ -70,16 +69,11 @@ def vote(name, UID, choice):
     else:
         pollingbooth.submitVote(vote, voterChainID)
 
-
-
-import time
 from threading import Thread
 
 if __name__ == '__main__':
     #we assume that we have created a voting station by now and have its chain ID
     #when a user enters we first check
-
-
     for i in range(10):
         t = Thread(target=vote, args=())
         t.start()
