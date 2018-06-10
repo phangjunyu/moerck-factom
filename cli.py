@@ -3,10 +3,14 @@ import chainFunctions as cf
 import registrationFunctions as rf
 import json
 import FinalCount as fc
+import base64
 
 def createVotingStation():
     voting_station_id = input("Please enter an ID for the voting station you want to create:\n")
-    status = cf.createVoteChain(voting_station_id)
+    first = input("Enter candidate one")
+    second = input("Enter candidate two")
+    candidates = [first, second]
+    status = cf.createVoteChain(voting_station_id, candidates)
     print(json.dumps(status, sort_keys=True, indent=4))
 
 def update():
@@ -56,3 +60,16 @@ def checkVoter():
 def getFinalCount():
     final_count = fc.FinalCount()
     print (final_count.countFinalTally())
+
+def getCandidates():
+    chainID = input("please enter chainID:\n")
+    first_entry = cf.queryChain(chainID)['links']['first']
+    result = cf.getEntry(first_entry)
+    content = base64.b64decode(result['content']).decode('UTF-8')
+    content = json.loads(content)
+    candidates = content['candidates']
+    for candidate in candidates:
+        print (candidate)
+    return candidates
+
+    # print(json.dumps(result, sort_keys=True, indent=4))
