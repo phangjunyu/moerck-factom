@@ -24,14 +24,16 @@ class PollingBooth:
         return (not rf.checkTokens(VA, userID)) and rf.checkTokens(RA, userID)
 
     def submitVote(self, vote, userID):
-        zzTime = secrets.randbelow(100)
+        zzTime = secrets.randbelow(10)
         print('start sleep', zzTime)
         time.sleep(zzTime)
         print('wake up')
+        current_time = str(time.time())
         cf.updateChain({
                         'vote' : vote.choice,
-                        'UnixTimeStamp' : str(time.time())
+                        'UnixTimeStamp' : current_time
                         } , self.votingStationID)
+        print(current_time)
         rf.putToken(VA, userID)
         print('voted for', vote.choice)
 
@@ -47,8 +49,6 @@ def checkVoter(name, uid):
 votingStationID = '5b856957cd2630858fa466093c5f8afa24ed640c2c7fa82bc64338a9d1c00afa'
 
 def register_vote(voterName, voterID):
-    voterName = name
-    voterID = UID
     #check if user already exist in the voter chain
     voterChainID = checkVoter(voterName, voterID)
     if not voterChainID:
