@@ -35,7 +35,7 @@ def putToken(type, chainID):
             RA: True,
             VA: va_
         }
-    elif type == "VA" and not va_ and ra_:
+    elif type == VA and not va_ and ra_:
         content = {
             RA: ra_,
             VA: True
