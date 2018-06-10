@@ -1,12 +1,4 @@
 import tkinter as tk
-import pb
-import glossary
-
-def show_entry_fields():
-   print("Name: %s\nUID: %s" % (e1.get(), e2.get()))
-
-def guiCreateVoter():
-    voterRegistered = pb.register_vote(e1.get(),e2.get())
 
 class Page(tk.Frame):
     def __init__(self, *args, **kwargs):
@@ -19,16 +11,6 @@ class Page1(Page):
        Page.__init__(self, *args, **kwargs)
        label = tk.Label(self, text="This is page 1")
        label.pack(side="top", fill="both", expand=True)
-       label2 = tk.Label(container, text="Name").grid(row=0)
-       label3 = tk.Label(container, text="UID").grid(row=1)
-
-       e1 = tk.Entry(container)
-       e2 = tk.Entry(container)
-
-       e1.grid(row=0, column=1)
-       e2.grid(row=1, column=1)
-
-       tk.Button(container, text='Submit', command=p1.lift).grid(row=3, column=1, pady=4)
 
 class Page2(Page):
    def __init__(self, *args, **kwargs):
@@ -67,9 +49,6 @@ class MainView(tk.Frame):
         b3.pack(side="left")
 
         p1.show()
-
-
-
 
 if __name__ == "__main__":
     root = tk.Tk()

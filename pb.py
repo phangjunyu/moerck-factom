@@ -46,22 +46,24 @@ def checkVoter(name, uid):
         return voter_[0]['chain_id']
 
 
-def vote():
-    votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
-    pollingbooth = PollingBooth(votingStationID)
-    voterName = 'wenkkjun' +str(time.time())
-    voterID = 'a'
+def register_vote(name, UID):
+    voterName = name
+    voterID = UID
 
     #check if user already exist in the voter chain
     voterChainID = checkVoter(voterName, voterID)
     if not voterChainID:
         status = rf.createVoter(voterName, voterID)
         voterChainID = status['chain_id']
-    print (voterChainID)
+    # print (voterChainID)
     #put the RA token of the voter
-    rf.putToken(RA, voterChainID)
+    return rf.putToken(RA, voterChainID)
+
+def vote(name, UID, choice):
+    votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
+    pollingbooth = PollingBooth(votingStationID)
     #once the RA token of the voter has been set, the voter is ready to vote
-    choice = input('vote')
+    # choice = input('vote')
     vote = pollingbooth.receiveVote(choice, voterChainID)
     if vote is False:
         raise ValueError
