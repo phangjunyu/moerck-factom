@@ -25,7 +25,10 @@ class PollingBooth:
     def submitVote(self, vote, userID):
         zzTime = secrets.randbelow(10)
         #time.sleep(zzTime)
-        cf.updateChain({'vote' : vote.choice} , self.votingStationID)
+        cf.updateChain({
+                        'vote' : vote.choice
+                        'UnixTimeStamp' : str(time.time())
+                        } , self.votingStationID)
         rf.putToken(VA, userID)
         print('voted for', vote.choice)
 

@@ -31,7 +31,6 @@ def updateChain(entry, chainID):
 #intermediate function for updateChain
 def getChainExternalIDs(chainID):
     chain_url_id = chain_url + "/"+chainID
-
     response = requests.get(chain_url_id, headers = headers)
     external_ids = response.json()["external_ids"]
     return external_ids
