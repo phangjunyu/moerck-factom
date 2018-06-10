@@ -46,7 +46,6 @@ def checkVoter(name, uid):
 
 votingStationID = '5b856957cd2630858fa466093c5f8afa24ed640c2c7fa82bc64338a9d1c00afa'
 
-votingStationID = 'c4a852f7e5216f315093f7024b6e9f445cbce22e142de3b034b4def1834ff0bd'
 def register_vote(voterName, voterID):
     voterName = name
     voterID = UID
@@ -59,8 +58,6 @@ def register_vote(voterName, voterID):
     #put the RA token of the voter
     rf.putToken(RA, voterChainID)
     return voterChainID
-
-def vote(voterChainID, choice):
 
 def vote(voterChainID, choice):
     pollingbooth = PollingBooth(votingStationID)
