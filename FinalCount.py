@@ -28,5 +28,5 @@ class FinalCount:
         jsonDictionary = json.loads(jsonString)
         return jsonDictionary
 
-fn = FinalCount()
-print(fn.countFinalTally())
+# fn = FinalCount()
+# print(fn.countFinalTally())
