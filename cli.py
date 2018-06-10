@@ -2,6 +2,7 @@
 import chainFunctions as cf
 import registrationFunctions as rf
 import json
+import FinalCount as fc
 
 def createVotingStation():
     voting_station_id = input("Please enter an ID for the voting station you want to create:\n")
@@ -51,3 +52,7 @@ def checkVoter():
         print("voter does not exist")
     else:
         print("Voter's chain_id is:", voter_[0]['chain_id'])
+
+def getFinalCount():
+    final_count = fc.FinalCount()
+    print (final_count.countFinalTally())

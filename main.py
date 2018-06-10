@@ -13,6 +13,7 @@ if choice == '1':
         1) Update a chain
         2) Query a chain
         3) Get all entries of a chain
+        4) Show final count
         """
 
     choice = input(menu)
@@ -21,7 +22,8 @@ if choice == '1':
       '0': cli.createVotingStation,
       '1': cli.update,
       '2': cli.query,
-      '3': cli.getEntries
+      '3': cli.getEntries,
+      '4': cli.getFinalCount
     }
 
     options[choice]()
