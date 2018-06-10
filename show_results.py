@@ -16,7 +16,7 @@ def results_html(results):
 
     p = figure(x_range=candidates, plot_width=800, plot_height=700, toolbar_location=None, title="Vote Count")
     p.vbar(x='candidates', top='counts', width=1, source=source, legend="candidates",
-           line_color='white', fill_color=factor_cmap('candidates', palette=bp.d3['Category20c'][len(candidates)], factors=candidates))
+           line_color='white', fill_color=factor_cmap('candidates', palette=['#0000FF', '#FF0000'], factors=candidates))
 
     p.xgrid.grid_line_color = None
     p.y_range.start = 0
