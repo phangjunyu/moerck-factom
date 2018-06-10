@@ -17,37 +17,50 @@ class Page(tk.Frame):
 class Page1(Page):
    def __init__(self, *args, **kwargs):
        Page.__init__(self, *args, **kwargs)
-       label = tk.Label(self, text="This is page 1")
-       label.pack(side="top", fill="both", expand=True)
-       label2 = tk.Label(container, text="Name").grid(row=0)
-       label3 = tk.Label(container, text="UID").grid(row=1)
+       p2 = args[1]
 
-       e1 = tk.Entry(container)
-       e2 = tk.Entry(container)
+       label2 = tk.Label(self, text="Name")
+       label3 = tk.Label(self, text="UID")
+       e1 = tk.Entry(self)
+       e2 = tk.Entry(self)
+       label2.pack(side="left", fill="x", expand=True)
+       e1.pack(side="left", fill="x", expand=True)
+       label3.pack(side="left", fill="x", expand=True)
+       e2.pack(side="left", fill="x", expand=True)
 
-       e1.grid(row=0, column=1)
-       e2.grid(row=1, column=1)
 
-       tk.Button(container, text='Submit', command=p1.lift).grid(row=3, column=1, pady=4)
+       b = tk.Button(self, text='Submit', command=p2.lift)
+       b.pack(side="left",fill="x", expand=True)
 
 class Page2(Page):
    def __init__(self, *args, **kwargs):
        Page.__init__(self, *args, **kwargs)
-       label = tk.Label(self, text="This is page 2")
-       label.pack(side="top", fill="both", expand=True)
+       p3 = args[1]
+       def myfn(p3):
+           print("hello")
+           p3.lift()
+       checkCmd = tk.IntVar()
+       checkCmd2 = tk.IntVar()
+       checkBox1 = tk.Checkbutton(self, variable=checkCmd, onvalue=1, offvalue=0, text="Command  Prompt").pack()
+       checkBox2 = tk.Checkbutton(self, variable=checkCmd2, onvalue=1, offvalue=0, text="Command  Prompt").pack()
+       buttonCmd = tk.Button(self, text="Run Checked Items", command=lambda: myfn(p3)).pack()
+       b = tk.Button(self, text='Submit', command=p3.lift)
+       b.pack(side="left",fill="x", expand=True)
 
 class Page3(Page):
    def __init__(self, *args, **kwargs):
        Page.__init__(self, *args, **kwargs)
-       label = tk.Label(self, text="This is page 3")
+       label = tk.Label(self, text="You Have Successfully Submitted your Vote!")
        label.pack(side="top", fill="both", expand=True)
 
 class MainView(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
-        p1 = Page1(self)
-        p2 = Page2(self)
+
         p3 = Page3(self)
+        p2 = Page2(self,p3)
+        p1 = Page1(self,p2)
+
 
         buttonframe = tk.Frame(self)
         container = tk.Frame(self)
@@ -58,17 +71,17 @@ class MainView(tk.Frame):
         p2.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
         p3.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
+
         b1 = tk.Button(buttonframe, text="Page 1", command=p1.lift)
         b2 = tk.Button(buttonframe, text="Page 2", command=p2.lift)
         b3 = tk.Button(buttonframe, text="Page 3", command=p3.lift)
+
 
         b1.pack(side="left")
         b2.pack(side="left")
         b3.pack(side="left")
 
         p1.show()
-
-
 
 
 if __name__ == "__main__":
