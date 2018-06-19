@@ -1,5 +1,5 @@
 import show_results
-import finalCount as fc
+import FinalCount as fc
 from flask import Flask, render_template
 
 app = Flask(__name__)
